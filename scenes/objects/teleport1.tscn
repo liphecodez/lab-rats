@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bjgib1vilik1w"]
+
+[ext_resource type="Script" uid="uid://nykjs5ph1pte" path="res://scripts/s_objects/tp.gd" id="1_xkcbc"]
+[ext_resource type="Texture2D" uid="uid://b6h8ufxt3qvs5" path="res://assets/terrain/theme1/Door_open.png" id="2_fyisf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(10, 10)
+
+[node name="Teleport" type="Area2D" unique_id=1249487213]
+collision_mask = 2
+script = ExtResource("1_xkcbc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=621109476]
+position = Vector2(8, 8)
+texture = ExtResource("2_fyisf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=510389922]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

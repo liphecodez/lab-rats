@@ -1,0 +1,203 @@
+[gd_scene format=3 uid="uid://c4y7fq8sdcwoy"]
+
+[ext_resource type="Script" uid="uid://bip48wrl3f58h" path="res://scripts/s_managment/level_select.gd" id="1_3shnc"]
+[ext_resource type="Texture2D" uid="uid://v2h2qw8ti8ep" path="res://assets/buttons/return-export.png" id="2_p0wlc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7lomy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ogo5k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gn5uh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j0que"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0jcas"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font_size = 64
+
+[node name="LevelSelect" type="Control" unique_id=1530542783 groups=["cannot_pause"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3shnc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=262312502]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.24705882, 0.08235294, 0.2784314, 1)
+
+[node name="leave" type="Button" parent="." unique_id=1869828790]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 48.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7lomy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogo5k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_gn5uh")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_j0que")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0jcas")
+icon = ExtResource("2_p0wlc")
+
+[node name="title" type="Label" parent="." unique_id=625177310]
+layout_mode = 0
+offset_left = 468.0
+offset_top = 56.0
+offset_right = 684.0
+offset_bottom = 144.0
+text = "Levels"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="BoxContainer" type="GridContainer" parent="." unique_id=375555487]
+custom_minimum_size = Vector2(64, 64)
+custom_maximum_size = Vector2(729, 381)
+layout_mode = 0
+offset_left = 264.0
+offset_top = 204.0
+offset_right = 888.0
+offset_bottom = 585.0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 8
+
+[node name="Level1" type="Button" parent="BoxContainer" unique_id=814126774]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L1"
+
+[node name="Level2" type="Button" parent="BoxContainer" unique_id=352375579]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L2"
+
+[node name="Level3" type="Button" parent="BoxContainer" unique_id=2001656070]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L3"
+
+[node name="Level4" type="Button" parent="BoxContainer" unique_id=1142790892]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L4"
+
+[node name="Level5" type="Button" parent="BoxContainer" unique_id=999516584]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L5"
+
+[node name="Level6" type="Button" parent="BoxContainer" unique_id=1079757550]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L6
+"
+
+[node name="Level7" type="Button" parent="BoxContainer" unique_id=1821216712]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L7"
+
+[node name="Level8" type="Button" parent="BoxContainer" unique_id=456663658]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L8"
+
+[node name="Level9" type="Button" parent="BoxContainer" unique_id=662597025]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L9"
+
+[node name="Level10" type="Button" parent="BoxContainer" unique_id=1043935130]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L10"
+
+[node name="Level11" type="Button" parent="BoxContainer" unique_id=990837800]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L11"
+
+[node name="Level12" type="Button" parent="BoxContainer" unique_id=1379315045]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L12"
+
+[node name="Level13" type="Button" parent="BoxContainer" unique_id=1820118140]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L13"
+
+[node name="Level14" type="Button" parent="BoxContainer" unique_id=1059931922]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L14"
+
+[node name="Level15" type="Button" parent="BoxContainer" unique_id=89481530]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L15"
+
+[node name="Level16" type="Button" parent="BoxContainer" unique_id=308129914]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "L16"
+
+[connection signal="pressed" from="leave" to="." method="_on_leave_pressed"]
+[connection signal="pressed" from="BoxContainer/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="BoxContainer/Level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="BoxContainer/Level3" to="." method="_on_level_3_pressed"]

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cjhttbeloues5"]
+
+[ext_resource type="Script" uid="uid://yefa8xa55vll" path="res://scripts/s_managment/sound_player.gd" id="1_17x1u"]
+[ext_resource type="AudioStream" uid="uid://cbajhvv6qr6b4" path="res://SFX/musics/The_sound_of_slaying.mp3" id="2_i0dm8"]
+
+[node name="SoundPlayer" type="Node2D" unique_id=420395933]
+script = ExtResource("1_17x1u")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=640908640]
+stream = ExtResource("2_i0dm8")
+volume_db = -41.763
+autoplay = true

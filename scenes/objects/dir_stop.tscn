@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dije4hysqlybs"]
+
+[ext_resource type="Texture2D" uid="uid://dx7p8gtjc4lmw" path="res://assets/terrain/theme1/Dir_stop.png" id="1_fe18r"]
+[ext_resource type="Script" uid="uid://bsgcwrpe8oxpf" path="res://scripts/s_objects/dir_stop.gd" id="1_qig5v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(8, 8)
+
+[node name="Dir_Stop" type="Area2D" unique_id=3255908]
+collision_mask = 2
+script = ExtResource("1_qig5v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=297559824]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=476242372]
+position = Vector2(8, 8)
+texture = ExtResource("1_fe18r")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

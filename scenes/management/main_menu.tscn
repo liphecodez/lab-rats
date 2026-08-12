@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://s2wgquvxyrxc"]
+
+[ext_resource type="Script" uid="uid://cfyq5fabp4slw" path="res://scripts/s_managment/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="FontFile" uid="uid://cy86lqtsffius" path="res://assets/fonts/grapesoda_2/GrapeSoda.ttf" id="2_am7b7"]
+[ext_resource type="FontFile" uid="uid://mt31ds6eqtd5" path="res://assets/fonts/press_start_2p/PressStart2P.ttf" id="3_h6sej"]
+
+[node name="MainMenu" type="Control" unique_id=1232568005 groups=["cannot_pause"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1844918315]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.24705882, 0.08235294, 0.2784314, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=326766688]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 101.0
+offset_right = 735.0
+offset_bottom = 496.0
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=2013600909]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_am7b7")
+theme_override_font_sizes/font_size = 45
+text = "Lab Rat"
+horizontal_alignment = 1
+
+[node name="play" type="Button" parent="VBoxContainer" unique_id=1285794853]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_h6sej")
+text = "Play"
+
+[node name="levels" type="Button" parent="VBoxContainer" unique_id=1967250730]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_h6sej")
+text = "Levels"
+
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=1830916121]
+layout_mode = 2
+text = "
+"
+horizontal_alignment = 1
+
+[node name="quit" type="Button" parent="VBoxContainer" unique_id=941518058]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_h6sej")
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/levels" to="." method="_on_levels_pressed"]
+[connection signal="pressed" from="VBoxContainer/quit" to="." method="_on_quit_pressed"]

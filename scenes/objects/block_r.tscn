@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bn7io0lkxrn8n"]
+
+[ext_resource type="Script" uid="uid://dh1isvnhdkj4" path="res://scripts/s_objects/block.gd" id="1_o65sm"]
+[ext_resource type="Texture2D" uid="uid://d2xuqn0fjgwty" path="res://assets/terrain/theme1/Door_close2.png" id="2_o65sm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(16, 16)
+
+[node name="Block2" type="StaticBody2D" unique_id=1847833010]
+collision_mask = 2
+script = ExtResource("1_o65sm")
+variation = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1006418253]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1966308952]
+position = Vector2(8, 8)
+texture = ExtResource("2_o65sm")

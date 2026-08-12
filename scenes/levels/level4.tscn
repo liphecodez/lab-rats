@@ -1,0 +1,54 @@
+[gd_scene format=4 uid="uid://cvdc6w31vjjkh"]
+
+[ext_resource type="PackedScene" uid="uid://c1dh1vufwr05w" path="res://scenes/levels/level_template_small.tscn" id="1_e127x"]
+[ext_resource type="PackedScene" uid="uid://dije4hysqlybs" path="res://scenes/objects/dir_stop.tscn" id="2_heu5o"]
+[ext_resource type="PackedScene" uid="uid://4js0cjd8cy4y" path="res://scenes/objects/dir_changer.tscn" id="3_s45gt"]
+[ext_resource type="PackedScene" uid="uid://cypugo0ua6sfe" path="res://scenes/objects/key_g.tscn" id="4_4vryo"]
+[ext_resource type="PackedScene" uid="uid://bn7io0lkxrn8n" path="res://scenes/objects/block_r.tscn" id="5_g1ckg"]
+[ext_resource type="PackedScene" uid="uid://pvty7skljd3b" path="res://scenes/objects/key_r.tscn" id="6_t7v7a"]
+
+[node name="Level_Template_Small" unique_id=101313414 instance=ExtResource("1_e127x")]
+level_n = 4
+keys1_n = 2
+keys2_n = 1
+
+[node name="walls" parent="map" parent_id_path=PackedInt32Array(1202541084) index="1" unique_id=386914540]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAJAAMAAAAAAAQAAAAEAAEAAAAAAAUAAAAMAAMAAAAAAAYAAAAEAAEAAAAAAAcAAAAEAAEAAAAAAAgAAAAEAAEAAAAAAAkAAAAGAAEAAAABAAkAAAABAAQAAAACAAkAAAABAAQAAAADAAkAAAABAAQAAAAEAAkAAAAMAAQAAAAFAAkAAAABAAQAAAAJAAkAAAABAAQAAAAKAAkAAAABAAQAAAALAAkAAAABAAQAAAAMAAkAAAABAAQAAAANAAkAAAABAAQAAAAOAAkAAAABAAQAAAAPAAkAAAAHAAQAAAAQAAkAAAABAAIAAAARAAkAAAACAAIAAAARAAgAAAACAAEAAAARAAcAAAACAAEAAAARAAYAAAACAAEAAAARAAUAAAACAAEAAAARAAQAAAAKAAQAAAARAAMAAAAEAAEAAAARAAIAAAAKAAMAAAARAAEAAAACAAEAAAARAAAAAAACAAAAAAAQAAAAAAAHAAMAAAAPAAAAAAABAAQAAAAOAAAAAAABAAQAAAANAAAAAAABAAQAAAAMAAAAAAANAAMAAAALAAAAAAABAAQAAAAKAAAAAAABAAQAAAAJAAAAAAABAAQAAAAIAAAAAAABAAQAAAAHAAAAAAABAAQAAAAGAAAAAAANAAMAAAAFAAAAAAABAAQAAAAEAAAAAAABAAQAAAACAAAAAAABAAQAAAABAAAAAAAGAAMAAAAGAAkAAAABAAQAAAAHAAkAAAABAAQAAAAIAAkAAAABAAQAAAADAAAAAAABAAQAAAABAAEAAAACAAEAAAABAAIAAAACAAEAAAABAAMAAAACAAIAAAABAAUAAAACAAQAAAADAAIAAAAAAAAAAAADAAMAAAAAAAIAAAADAAUAAAAAAAQAAAAEAAIAAAACAAAAAAAEAAMAAAAKAAMAAAAEAAQAAAAEAAEAAAAEAAUAAAANAAQAAAAEAAYAAAAMAAMAAAAEAAcAAAAEAAEAAAAEAAgAAAAEAAEAAAAFAAYAAAABAAQAAAAGAAEAAAAEAAEAAAAGAAIAAAAEAAEAAAAGAAMAAAAEAAEAAAAGAAQAAAAEAAIAAAAGAAYAAAAHAAAAAAAGAAcAAAAEAAIAAAAIAAIAAAAGAAAAAAAIAAMAAAAEAAEAAAAIAAQAAAAEAAEAAAAIAAUAAAAEAAEAAAAIAAYAAAAJAAQAAAAIAAcAAAAAAAIAAAAJAAIAAAABAAQAAAAJAAYAAAABAAAAAAAJAAcAAAABAAIAAAAKAAQAAAAAAAQAAAAKAAYAAAABAAAAAAAKAAcAAAABAAIAAAALAAQAAAABAAQAAAALAAYAAAABAAAAAAALAAcAAAABAAIAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAIAAAAPAAYAAAABAAAAAAAPAAcAAAAPAAQAAAAPAAgAAAAAAAEAAAAQAAEAAAAAAAEAAAAQAAIAAAAAAAIAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAEAAAAQAAYAAAAPAAMAAAAQAAcAAAABAAEAAAAQAAgAAAABAAEAAAAKAAIAAAACAAQAAAAMAAEAAAAEAAEAAAAMAAIAAAAEAAIAAAAMAAQAAAACAAQAAAAMAAYAAAACAAAAAAAMAAcAAAACAAIAAAAOAAIAAAAEAAQAAAAOAAQAAAAEAAQAAAA=")
+
+[node name="Goal" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="0" unique_id=1294961977]
+position = Vector2(32, 112)
+
+[node name="Dir_Stop" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="1" unique_id=3255908 instance=ExtResource("2_heu5o")]
+position = Vector2(112, 80)
+
+[node name="Dir_Changer" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="2" unique_id=46172493 instance=ExtResource("3_s45gt")]
+position = Vector2(224, 48)
+direction = 1
+
+[node name="Dir_Changer2" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="3" unique_id=1521615496 instance=ExtResource("3_s45gt")]
+position = Vector2(208, 112)
+direction = 2
+
+[node name="Dir_Stop2" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="4" unique_id=2034946076 instance=ExtResource("2_heu5o")]
+position = Vector2(208, 80)
+
+[node name="Dir_Stop3" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="5" unique_id=925767289 instance=ExtResource("2_heu5o")]
+position = Vector2(176, 48)
+
+[node name="Key" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="6" unique_id=1570326481]
+position = Vector2(112, 128)
+
+[node name="Key2" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="7" unique_id=54446735 instance=ExtResource("4_4vryo")]
+position = Vector2(240, 48)
+
+[node name="Block" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="8" unique_id=1847833010]
+position = Vector2(32, 80)
+
+[node name="player" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="9" unique_id=2084039034]
+position = Vector2(32, 16)
+
+[node name="Block2" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="11" unique_id=1600172753 instance=ExtResource("5_g1ckg")]
+position = Vector2(112, 96)
+
+[node name="Key3" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="12" unique_id=1989933157 instance=ExtResource("6_t7v7a")]
+position = Vector2(240, 80)

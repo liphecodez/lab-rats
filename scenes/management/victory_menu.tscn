@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://c66y21fh4ky1x"]
+
+[ext_resource type="Script" uid="uid://cb5f383qgxn8o" path="res://scripts/s_managment/victory_menu.gd" id="1_tptrr"]
+[ext_resource type="Texture2D" uid="uid://bjly5t1epga0i" path="res://assets/buttons/exit.png" id="2_go0eg"]
+[ext_resource type="FontFile" uid="uid://cy86lqtsffius" path="res://assets/fonts/grapesoda_2/GrapeSoda.ttf" id="2_s1tqg"]
+[ext_resource type="Texture2D" uid="uid://dbi0bxugt2v2a" path="res://assets/buttons/restart.png" id="3_gih0b"]
+[ext_resource type="Texture2D" uid="uid://c6nli31j5206x" path="res://assets/buttons/next.png" id="4_67jmu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sfblf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b0ktq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j2c52"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kjp8e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k6ngs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_quw1x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7enou"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cey58"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vrisw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hupc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iv0tk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unugg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5rbus"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cmp1f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hmhf"]
+
+[node name="VictoryMenu" type="CanvasLayer" unique_id=383957585 groups=["cannot_pause"]]
+script = ExtResource("1_tptrr")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1859892956]
+offset_left = 275.0
+offset_right = 880.0
+offset_bottom = 648.0
+color = Color(0.24705882, 0.08235294, 0.2784314, 0.81960785)
+
+[node name="HBoxContainer" type="CenterContainer" parent="." unique_id=152729963]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -254.0
+offset_right = 575.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=321087097]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s1tqg")
+theme_override_font_sizes/font_size = 60
+text = "You Win!!"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=959020421]
+offset_top = 267.0
+offset_right = 288.0
+offset_bottom = 353.66666
+scale = Vector2(4, 4.05)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=484269519]
+layout_mode = 2
+theme_override_constants/separation = 11
+alignment = 1
+
+[node name="exit" type="Button" parent="CenterContainer/HBoxContainer" unique_id=572335237]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sfblf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b0ktq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j2c52")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kjp8e")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k6ngs")
+icon = ExtResource("2_go0eg")
+
+[node name="restart" type="Button" parent="CenterContainer/HBoxContainer" unique_id=822444619]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_quw1x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7enou")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cey58")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vrisw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0hupc")
+icon = ExtResource("3_gih0b")
+
+[node name="next" type="Button" parent="CenterContainer/HBoxContainer" unique_id=1008500180]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_iv0tk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_unugg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5rbus")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cmp1f")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0hmhf")
+icon = ExtResource("4_67jmu")
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/next" to="." method="_on_next_pressed"]

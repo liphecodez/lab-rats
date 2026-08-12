@@ -1,0 +1,84 @@
+[gd_scene format=4 uid="uid://xggtf8md65hk"]
+
+[ext_resource type="Script" uid="uid://b0qjxjsq8ufa3" path="res://scripts/player.gd" id="1_6sh32"]
+[ext_resource type="Script" uid="uid://yiw24xy6some" path="res://scenes/level_1.gd" id="1_bbk5w"]
+[ext_resource type="Texture2D" uid="uid://ds04vkvxe3fk2" path="res://assets/player/player.png" id="1_ru4tf"]
+[ext_resource type="Texture2D" uid="uid://ds0vojae4hpu" path="res://assets/terrain/theme1/Tile.png" id="2_6sh32"]
+[ext_resource type="Texture2D" uid="uid://c4e76rtoijqo7" path="res://assets/terrain/theme1/Door_close.png" id="3_ejswk"]
+[ext_resource type="Texture2D" uid="uid://b6h8ufxt3qvs5" path="res://assets/terrain/theme1/Door_open.png" id="4_bbk5w"]
+[ext_resource type="Texture2D" uid="uid://s7um0jf3e0fm" path="res://assets/terrain/theme1/Spikes.png" id="5_conm7"]
+[ext_resource type="PackedScene" uid="uid://cndt7hw7ub716" path="res://scenes/pause.tscn" id="8_conm7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(14, 14)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d3jkd"]
+texture = ExtResource("2_6sh32")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, -8, -8, -8, 8, 8, 8)
+0:0/0/custom_data_0 = "wall"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3awl"]
+texture = ExtResource("3_ejswk")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = "door"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ku1j"]
+texture = ExtResource("4_bbk5w")
+0:0/0 = 0
+0:0/0/custom_data_0 = "door"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f31uk"]
+texture = ExtResource("5_conm7")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1.2590103, 8, -1.2590103, 8, 8, -8, 8)
+0:0/0/custom_data_0 = "spike"
+
+[sub_resource type="TileSet" id="TileSet_g4v7s"]
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "type"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_d3jkd")
+sources/1 = SubResource("TileSetAtlasSource_u3awl")
+sources/2 = SubResource("TileSetAtlasSource_2ku1j")
+sources/3 = SubResource("TileSetAtlasSource_f31uk")
+
+[node name="Level1" type="Node2D" unique_id=101313414]
+script = ExtResource("1_bbk5w")
+
+[node name="player" type="CharacterBody2D" parent="." unique_id=2040620622]
+motion_mode = 1
+script = ExtResource("1_6sh32")
+
+[node name="player_hb" type="CollisionShape2D" parent="player" unique_id=937310067]
+position = Vector2(24, 136)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="player_spr" type="Sprite2D" parent="player" unique_id=1820329297]
+z_index = 1
+position = Vector2(24, 136)
+texture = ExtResource("1_ru4tf")
+
+[node name="map" type="Node2D" parent="." unique_id=1202541084]
+
+[node name="cenario" type="TileMapLayer" parent="map" unique_id=386914540]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAACAAkAAAAAAAAAAAADAAkAAAAAAAAAAAAEAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAAAAAAAAAAOAAkAAAAAAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAAAAAAAAAARAAgAAAAAAAAAAAARAAcAAAAAAAAAAAARAAYAAAAAAAAAAAARAAUAAAAAAAAAAAARAAQAAAAAAAAAAAARAAMAAAAAAAAAAAARAAIAAAAAAAAAAAARAAEAAAAAAAAAAAARAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAANAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAALAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_g4v7s")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1436512136]
+position = Vector2(144, 80)
+zoom = Vector2(4, 4.05)
+limit_enabled = false
+editor_draw_limits = true
+
+[node name="Pause" parent="Camera2D" unique_id=41395391 instance=ExtResource("8_conm7")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -73.0
+offset_top = -17.0
+offset_right = -73.0
+offset_bottom = -17.0
+grow_horizontal = 1
+grow_vertical = 1

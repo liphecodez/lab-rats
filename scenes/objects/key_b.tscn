@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b837bn74bd8mi"]
+
+[ext_resource type="Script" uid="uid://d1cdtmheqhde4" path="res://scripts/s_objects/key.gd" id="1_0xc4c"]
+[ext_resource type="Texture2D" uid="uid://b7mrkkod70xwb" path="res://assets/terrain/theme1/Key3.png" id="2_0xc4c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(10, 16)
+
+[node name="Key" type="Area2D" unique_id=1570326481]
+collision_mask = 2
+script = ExtResource("1_0xc4c")
+variation = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2102073012]
+texture = ExtResource("2_0xc4c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=937574430]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
