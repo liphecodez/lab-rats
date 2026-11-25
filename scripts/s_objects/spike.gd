@@ -22,5 +22,5 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		if body.act_dir == -spike_dir:
+		if body.velocity.normalized() == -spike_dir:
 			body.die()

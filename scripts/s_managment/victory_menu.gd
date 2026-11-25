@@ -3,27 +3,33 @@ extends CanvasLayer
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
-	
+
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("next") and visible == true:
-		toggle_victory()
-		get_tree().change_scene_to_file(GameManager.LEVELS[GameManager.act_level + 1])
+	if visible and event.is_action_pressed("next"):
+		get_viewport().set_input_as_handled()
+		_on_next_pressed()
 
 func _on_exit_pressed() -> void:
-	toggle_victory()
-	SoundPlayer.play_sound("res://SFX/managment_sfx/UI_click.mp3")
-	get_tree().change_scene_to_file("res://scenes/management/main_menu.tscn")
+	close_victory()
+	get_tree().change_scene_to_file(GameManager.MAIN_MENU)
 
 func _on_restart_pressed() -> void:
-	toggle_victory()
-	SoundPlayer.play_sound("res://SFX/managment_sfx/UI_click.mp3")
+	close_victory()
 	get_tree().reload_current_scene()
 
 func _on_next_pressed() -> void:
-	toggle_victory()
-	SoundPlayer.play_sound("res://SFX/managment_sfx/UI_click.mp3")
-	get_tree().change_scene_to_file(GameManager.LEVELS[GameManager.act_level + 1])
+	close_victory()
+	if GameManager.act_level < GameManager.LEVELS.size():
+		GameManager.open_level(GameManager.act_level + 1)
+	else:
+		get_tree().change_scene_to_file(GameManager.MAIN_MENU)
 
-func toggle_victory():
-	get_tree().paused = !get_tree().paused
-	visible = get_tree().paused
+func show_victory() -> void:
+	$CenterContainer/HBoxContainer/next.visible = GameManager.act_level < GameManager.LEVELS.size()
+	get_tree().paused = true
+	show()
+
+func close_victory() -> void:
+	hide()
+	get_tree().paused = false
+	SoundPlayer.play_sound("res://SFX/managment_sfx/UI_click.mp3")

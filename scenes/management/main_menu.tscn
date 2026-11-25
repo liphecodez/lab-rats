@@ -48,6 +48,7 @@ text = "Levels"
 
 [node name="Label2" type="Label" parent="VBoxContainer" unique_id=1830916121]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_h6sej")
 text = "
 "
 horizontal_alignment = 1

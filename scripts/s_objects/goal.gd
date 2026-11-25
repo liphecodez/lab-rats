@@ -6,7 +6,7 @@ func _ready() -> void:
 	anim.play("default")
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		VictoryMenu.toggle_victory()
+	if body.is_in_group("player") and not body.dying and not VictoryMenu.visible:
+		VictoryMenu.show_victory()
 		SoundPlayer.play_sound("res://SFX/objects_sfx/Goal.mp3")
 		queue_free()
