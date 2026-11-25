@@ -47,7 +47,7 @@ jobs:
         run: |
           godot --headless --editor --import 2>&1 | tee "$RUNNER_TEMP/import.log"
           godot --headless --quit-after 3 2>&1 | tee "$RUNNER_TEMP/startup.log"
-          godot --headless --quit-after 300 res://tests/smoke.tscn 2>&1 | tee "$RUNNER_TEMP/smoke.log"
+          godot --headless --fixed-fps 60 --quit-after 10000 res://tests/smoke.tscn 2>&1 | tee "$RUNNER_TEMP/smoke.log"
           if grep -E 'ERROR:|WARNING:' "$RUNNER_TEMP/"{import,startup,smoke}.log; then exit 1; fi
           grep -F 'Lab Rats smoke checks passed' "$RUNNER_TEMP/smoke.log"
 

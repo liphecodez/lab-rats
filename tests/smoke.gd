@@ -1,5 +1,14 @@
 extends Node
 
+const ROUTES = [
+	"RULULDRUR",
+	"URU",
+	"URDR",
+	"RDRURDLDRURDLLURULDDULULD",
+	"LDRURLULURRULDRDLULDURDRU",
+]
+const ACTIONS = {"U": "UP", "R": "RIGHT", "D": "DOWN", "L": "LEFT"}
+
 func _ready() -> void:
 	# Keep this runner alive while the main scenes are replaced.
 	get_tree().current_scene = null
@@ -18,18 +27,22 @@ func run() -> void:
 
 	GameManager.open_level(1)
 	await tree.scene_changed
-	for number in range(1, 6):
+	for number in range(1, ROUTES.size() + 1):
 		assert(GameManager.act_level == number)
 		GameManager.keys1_col = 1
 		PauseMenu.toggle_pause()
 		PauseMenu._on_restart_pressed()
 		await tree.scene_changed
 		assert(not tree.paused and not PauseMenu.visible and GameManager.keys1_col == 0)
-		var player = tree.current_scene.get_node("map/objects/player")
-		var goal = tree.current_scene.get_node("map/objects/Goal")
-		goal._on_body_entered(player)
+		await play_route(ROUTES[number - 1])
+		assert(VictoryMenu.visible, "Could not solve level %s" % number)
+		if number == 1:
+			VictoryMenu._on_restart_pressed()
+			await tree.scene_changed
+			assert(not tree.paused and not VictoryMenu.visible and GameManager.act_level == 1)
+			await play_route(ROUTES[0])
 		assert(VictoryMenu.visible and tree.paused)
-		assert(VictoryMenu.get_node("CenterContainer/HBoxContainer/next").visible == (number < 5))
+		assert(VictoryMenu.get_node("CenterContainer/HBoxContainer/next").visible == (number < ROUTES.size()))
 		# Exercise the same handler used by Enter and by the Next button.
 		VictoryMenu._on_next_pressed()
 		await tree.scene_changed
@@ -78,3 +91,22 @@ func run() -> void:
 
 	print("Lab Rats smoke checks passed")
 	tree.quit()
+
+
+func play_route(route: String) -> void:
+	var tree := get_tree()
+	var player := tree.current_scene.get_node("map/objects/player")
+	for frame in range(5):
+		await tree.physics_frame
+	for direction in route:
+		var action: String = ACTIONS[direction]
+		Input.action_press(action)
+		await tree.physics_frame
+		await tree.physics_frame
+		Input.action_release(action)
+		for frame in range(1200):
+			if player.idle or VictoryMenu.visible:
+				break
+			await tree.physics_frame
+		if VictoryMenu.visible:
+			break

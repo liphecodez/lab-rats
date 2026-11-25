@@ -69,5 +69,5 @@ O GitHub Actions importa o projeto, verifica a inicialização e as cenas, roda 
 
 ```bash
 godot --headless --editor --import
-godot --headless --quit-after 300 res://tests/smoke.tscn
+godot --headless --fixed-fps 60 --quit-after 10000 res://tests/smoke.tscn
 ```
