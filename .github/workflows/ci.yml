@@ -48,20 +48,20 @@ jobs:
           godot --headless --editor --import 2>&1 | tee "$RUNNER_TEMP/import.log"
           godot --headless --quit-after 3 2>&1 | tee "$RUNNER_TEMP/startup.log"
           godot --headless --quit-after 300 res://tests/smoke.tscn 2>&1 | tee "$RUNNER_TEMP/smoke.log"
-          if rg 'ERROR:|WARNING:' "$RUNNER_TEMP/"{import,startup,smoke}.log; then exit 1; fi
-          rg -F 'Lab Rats smoke checks passed' "$RUNNER_TEMP/smoke.log"
+          if grep -E 'ERROR:|WARNING:' "$RUNNER_TEMP/"{import,startup,smoke}.log; then exit 1; fi
+          grep -F 'Lab Rats smoke checks passed' "$RUNNER_TEMP/smoke.log"
 
       - name: Export and verify static files
         shell: bash
         run: |
           mkdir -p builds/web
           godot --headless --export-release Web builds/web/index.html 2>&1 | tee "$RUNNER_TEMP/export.log"
-          if rg 'ERROR:|WARNING:' "$RUNNER_TEMP/export.log"; then exit 1; fi
+          if grep -E 'ERROR:|WARNING:' "$RUNNER_TEMP/export.log"; then exit 1; fi
           cd builds/web
           for file in index.html index.js index.wasm index.pck index.audio.worklet.js index.audio.position.worklet.js; do
             test -s "$file"
           done
-          rg -F 'const GODOT_THREADS_ENABLED = false;' index.html
+          grep -F 'const GODOT_THREADS_ENABLED = false;' index.html
           test "$(head -c 4 index.pck)" = GDPC
           test "$(od -An -tx1 -N4 index.wasm | xargs)" = "00 61 73 6d"
 
