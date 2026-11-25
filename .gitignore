@@ -1,3 +1,4 @@
 .godot/
 /android/
-/builds/
+/builds/*
+!/builds/.gdignore
