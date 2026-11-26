@@ -1,0 +1,78 @@
+[gd_scene format=4 uid="uid://bu1bpdkj3tfm6"]
+
+[ext_resource type="PackedScene" uid="uid://g4ta00r6t8oh" path="res://scenes/objects/enemy.tscn" id="Patrol"]
+[ext_resource type="PackedScene" uid="uid://bjgib1vilik1w" path="res://scenes/objects/teleport1.tscn" id="Portal"]
+[ext_resource type="PackedScene" uid="uid://bn7io0lkxrn8n" path="res://scenes/objects/block_r.tscn" id="RedDoor"]
+[ext_resource type="PackedScene" uid="uid://pvty7skljd3b" path="res://scenes/objects/key_r.tscn" id="RedKey"]
+[ext_resource type="PackedScene" uid="uid://dije4hysqlybs" path="res://scenes/objects/dir_stop.tscn" id="Stop"]
+[ext_resource type="PackedScene" uid="uid://c1dh1vufwr05w" path="res://scenes/levels/level_template_small.tscn" id="template"]
+[ext_resource type="PackedScene" uid="uid://c43mhlfpmrf47" path="res://scenes/objects/spike.tscn" id="Trap"]
+
+[node name="Level8" unique_id=101313414 instance=ExtResource("template")]
+level_n = 8
+keys1_n = 1
+keys2_n = 1
+
+[node name="walls" parent="map" parent_id_path=PackedInt32Array(1202541084) index="1" unique_id=386914540]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAEAAAAAAAQAAAAJAAMAAAAAAAUAAAAEAAEAAAAAAAYAAAAEAAEAAAAAAAcAAAAEAAEAAAAAAAgAAAAEAAEAAAAAAAkAAAAGAAEAAAABAAkAAAABAAQAAAACAAkAAAAHAAQAAAADAAkAAAABAAIAAAAEAAkAAAAGAAQAAAAFAAkAAAABAAQAAAAJAAkAAAABAAQAAAAKAAkAAAABAAQAAAALAAkAAAAHAAQAAAAMAAkAAAAGAAQAAAANAAkAAAABAAQAAAAOAAkAAAAHAAQAAAAPAAkAAAABAAIAAAAQAAkAAAABAAIAAAARAAkAAAACAAIAAAARAAgAAAAKAAQAAAARAAcAAAAEAAEAAAARAAYAAAAEAAEAAAARAAUAAAAEAAEAAAARAAQAAAAEAAEAAAARAAMAAAAEAAEAAAARAAIAAAAEAAEAAAARAAEAAAAEAAEAAAARAAAAAAAHAAAAAAAQAAAAAAABAAQAAAAPAAAAAAABAAQAAAAOAAAAAAABAAQAAAANAAAAAAABAAQAAAAMAAAAAAABAAQAAAALAAAAAAABAAQAAAAKAAAAAAAGAAMAAAAJAAAAAAABAAAAAAAIAAAAAAABAAAAAAAHAAAAAAABAAAAAAAGAAAAAAAHAAMAAAAFAAAAAAABAAQAAAAEAAAAAAAGAAMAAAACAAAAAAABAAAAAAABAAAAAAABAAAAAAAGAAkAAAABAAQAAAAHAAkAAAABAAQAAAAIAAkAAAABAAQAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAAEAAEAAAACAAEAAAAGAAEAAAAAAAIAAAAHAAEAAAABAAIAAAAIAAEAAAABAAIAAAAJAAEAAAABAAIAAAAKAAEAAAAKAAMAAAABAAIAAAABAAEAAAACAAIAAAABAAEAAAADAAIAAAABAAEAAAAEAAIAAAACAAEAAAAKAAIAAAAJAAQAAAAMAAIAAAABAAAAAAANAAIAAAABAAAAAAAOAAIAAAABAAAAAAAPAAIAAAACAAAAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAACAAEAAAAGAAMAAAAAAAAAAAAHAAMAAAABAAAAAAAIAAMAAAACAAAAAAAKAAMAAAAAAAEAAAAMAAMAAAABAAEAAAANAAMAAAABAAEAAAAOAAMAAAABAAEAAAAPAAMAAAACAAEAAAABAAQAAAABAAIAAAACAAQAAAABAAIAAAADAAQAAAABAAIAAAAEAAQAAAACAAIAAAAGAAQAAAAAAAIAAAAHAAQAAAABAAIAAAAIAAQAAAACAAIAAAAKAAQAAAAAAAEAAAALAAQAAAABAAEAAAAMAAQAAAAQAAQAAAANAAQAAAABAAIAAAAOAAQAAAAPAAQAAAAPAAQAAAACAAEAAAAKAAUAAAAAAAEAAAALAAUAAAABAAEAAAAMAAUAAAACAAEAAAAOAAUAAAAAAAEAAAAPAAUAAAACAAEAAAACAAYAAAAAAAAAAAADAAYAAAABAAAAAAAEAAYAAAACAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAABAAAAAAAIAAYAAAACAAAAAAAKAAYAAAAAAAEAAAALAAYAAAAQAAQAAAAMAAYAAAACAAIAAAAOAAYAAAAAAAIAAAAPAAYAAAACAAIAAAACAAcAAAAAAAEAAAADAAcAAAABAAEAAAAEAAcAAAACAAEAAAAGAAcAAAAAAAIAAAAHAAcAAAABAAIAAAAIAAcAAAACAAIAAAAKAAcAAAAAAAIAAAALAAcAAAAKAAMAAAACAAgAAAAAAAEAAAADAAgAAAABAAEAAAAEAAgAAAACAAEAAAALAAgAAAAJAAQAAAAMAAgAAAACAAAAAAAOAAgAAAAAAAAAAAAPAAgAAAABAAAAAAAQAAgAAAABAAAAAAALAAMAAAABAAEAAAALAAIAAAABAAAAAAA=")
+
+[node name="text_ballon" parent="map" parent_id_path=PackedInt32Array(1202541084) index="2" unique_id=696958607]
+tile_map_data = PackedByteArray("AAACAAIAAAABAAEAAAACAAMAAAABAAIAAAADAAIAAAABAAEAAAADAAMAAAABAAIAAAABAAIAAAABAAEAAAABAAMAAAABAAIAAAABAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAAAAAAAAAAAAAAAAAACAAAAAAABAAAAAAAEAAAAAAACAAAAAAADAAAAAAABAAAAAAABAAAAAAABAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAEAAEAAAACAAEAAAAEAAIAAAACAAEAAAAEAAMAAAACAAIAAAAAAAMAAAAAAAIAAAA=")
+
+[node name="Label" parent="map" parent_id_path=PackedInt32Array(1202541084) index="3" unique_id=198192231]
+offset_left = 10.0
+offset_top = 13.0
+offset_right = 74.0
+offset_bottom = 53.0
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 11
+text = "Patrol ahead
+Wait for
+a clear path"
+
+[node name="Goal" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="0" unique_id=1294961977]
+position = Vector2(192, 112)
+
+[node name="Key" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="1" unique_id=1570326481]
+position = Vector2(144, 64)
+
+[node name="Block" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="2" unique_id=1847833010]
+position = Vector2(112, 128)
+
+[node name="player" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="3" unique_id=2084039034]
+position = Vector2(16, 128)
+
+[node name="Spike" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="4" unique_id=1384175262]
+position = Vector2(104, 40)
+direction = 3
+
+[node name="CenterStop" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="5" unique_id=398793909 instance=ExtResource("Stop")]
+position = Vector2(80, 80)
+
+[node name="EastStop" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="6" unique_id=474927094 instance=ExtResource("Stop")]
+position = Vector2(144, 80)
+
+[node name="WestSpikes" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="7" unique_id=278403215 instance=ExtResource("Trap")]
+position = Vector2(88, 24)
+direction = 2
+
+[node name="EastSpikes" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="8" unique_id=1602464864 instance=ExtResource("Trap")]
+position = Vector2(136, 136)
+direction = 1
+
+[node name="RedKey" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="9" unique_id=1077465596 instance=ExtResource("RedKey")]
+position = Vector2(80, 64)
+
+[node name="RedDoor" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="10" unique_id=581372088 instance=ExtResource("RedDoor")]
+position = Vector2(256, 48)
+
+[node name="EntryPortal" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="11" unique_id=2088470441 node_paths=PackedStringArray("destination") instance=ExtResource("Portal")]
+position = Vector2(160, 128)
+destination = NodePath("../ExitPortal")
+
+[node name="ExitPortal" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="12" unique_id=1798290530 node_paths=PackedStringArray("destination") instance=ExtResource("Portal")]
+position = Vector2(176, 16)
+destination = NodePath("../EntryPortal")
+
+[node name="Patrol" parent="map/objects" parent_id_path=PackedInt32Array(569427329) index="13" unique_id=1426910677 instance=ExtResource("Patrol")]
+position = Vector2(216, 104)

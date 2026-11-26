@@ -6,6 +6,9 @@ const ROUTES = [
 	"URDR",
 	"RDRURDLDRURDLLURULDDULULD",
 	"LDRURLULURRULDRDLULDURDRU",
+	"RURULUR",
+	"URLDRDL",
+	"URRULDDRDL",
 ]
 const ACTIONS = {"U": "UP", "R": "RIGHT", "D": "DOWN", "L": "LEFT"}
 
@@ -25,6 +28,7 @@ func run() -> void:
 			if file.ends_with(".gd"):
 				assert(load("res://scripts/%s/%s" % [directory, file]).can_instantiate())
 
+	assert(ROUTES.size() == GameManager.LEVELS.size())
 	GameManager.open_level(1)
 	await tree.scene_changed
 	for number in range(1, ROUTES.size() + 1):
@@ -48,6 +52,17 @@ func run() -> void:
 		await tree.scene_changed
 		assert(not VictoryMenu.visible and not tree.paused)
 	assert(tree.current_scene.scene_file_path == GameManager.MAIN_MENU)
+
+	# Test head-on approaches into the up and left branches of level 6.
+	GameManager.open_level(6)
+	await tree.scene_changed
+	for action in ["UP", "LEFT"]:
+		await play_route("RU")
+		var before_death := tree.current_scene.get_instance_id()
+		Input.action_press(action)
+		await tree.scene_changed
+		Input.action_release(action)
+		assert(GameManager.act_level == 6 and tree.current_scene.get_instance_id() != before_death)
 
 	GameManager.open_level(3)
 	await tree.scene_changed
@@ -98,13 +113,20 @@ func play_route(route: String) -> void:
 	var player := tree.current_scene.get_node("map/objects/player")
 	for frame in range(5):
 		await tree.physics_frame
-	for direction in route:
-		var action: String = ACTIONS[direction]
+	for index in route.length():
+		if GameManager.act_level == 8 and index == route.length() - 1:
+			var patrol := tree.current_scene.get_node("map/objects/Patrol") as CharacterBody2D
+			# Cross once the patrol is moving toward the far end of its vertical lane.
+			while patrol.position.y >= 96.0 or patrol.velocity.y >= 0.0:
+				await tree.physics_frame
+		var action: String = ACTIONS[route[index]]
 		Input.action_press(action)
 		await tree.physics_frame
 		await tree.physics_frame
 		Input.action_release(action)
 		for frame in range(1200):
+			if not is_instance_valid(player):
+				return
 			if player.idle or VictoryMenu.visible:
 				break
 			await tree.physics_frame

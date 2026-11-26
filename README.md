@@ -1,8 +1,15 @@
 # Lab Rats
 
+[**Jogar no navegador**](https://liphecodez.github.io/lab-rats/)
+
 Puzzle 2D em que um rato desliza pelo labirinto. Escolha a direção de partida e use as paredes, os pisos de parada e os redirecionadores para alcançar a saída. Nas fases com portas coloridas, colete todas as chaves da cor correspondente para abri-las. Os espinhos são letais ao serem atingidos de frente.
 
-O jogo tem cinco fases, acessíveis pelo menu **Levels**. **Play** abre a fase mais recente da sessão. Após a quinta fase, use o botão de saída da tela de vitória ou pressione **Enter** para voltar ao início.
+O jogo tem oito fases, acessíveis pelo menu **Select level**. **Play** abre a fase mais recente da sessão. Após a oitava fase, use **Menu** na tela de vitória ou pressione **Enter** para voltar ao início.
+
+- **Fases 1 a 5** introduzem o deslizamento, os redirecionadores, as paradas e as portas com chaves.
+- **Fase 6** apresenta os espinhos direcionais e rotas que exigem parar antes de entrar em corredores perigosos.
+- **Fase 7** combina um par de portais com uma porta trancada. O portal conserva a direção do movimento.
+- **Fase 8** combina duas cores de chaves, espinhos, portais e uma patrulha. Observe o inimigo antes de cruzar seu caminho.
 
 ## Controles
 
@@ -19,8 +26,8 @@ O jogo tem cinco fases, acessíveis pelo menu **Levels**. **Play** abre a fase m
 
 O projeto declara Godot **4.7** e usa **GDScript**, **TileMapLayer**, o renderer **GL Compatibility**, sprites 2D, fontes TTF e áudio MP3. O editor e os templates usados para validação e exportação são os oficiais da versão **4.7.2 stable**.
 
-- `scenes/levels/` contém as cinco fases e os três modelos reutilizáveis. `scripts/s_levels/level_template.gd` registra a fase ativa e reinicializa os contadores de chaves toda vez que uma fase é instanciada.
-- `scenes/objects/` e `scripts/s_objects/` contêm o rato e os objetos interativos. Os sinais `body_entered` e `body_exited` de `Area2D` ligam a colisão aos efeitos sobre o jogador. O portal e o inimigo patrulheiro existem como objetos reutilizáveis e ficam fora das cinco fases atuais.
+- `scenes/levels/` contém as oito fases e os três modelos reutilizáveis. `scripts/s_levels/level_template.gd` registra a fase ativa e reinicializa os contadores de chaves toda vez que uma fase é instanciada.
+- `scenes/objects/` e `scripts/s_objects/` contêm o rato e os objetos interativos. Os sinais `body_entered` e `body_exited` de `Area2D` ligam a colisão aos efeitos sobre o jogador. Os portais aparecem nas duas últimas fases, e a patrulha cruza o corredor final da fase 8.
 - `scenes/management/` e `scripts/s_managment/` contêm os menus, a câmera e os serviços globais. Os botões emitem `pressed` para acionar as transições.
 
 | Autoload | Responsabilidade |
@@ -49,7 +56,7 @@ godot --headless --export-release Web builds/web/index.html
 python3 -m http.server 8000 --bind 127.0.0.1 --directory builds/web
 ```
 
-Abra `http://127.0.0.1:8000/`. Para publicar em GitHub Pages, coloque **todo** o conteúdo de `builds/web/` no diretório publicado. O HTML, o JavaScript, o WebAssembly, o pacote de recursos e os scripts de áudio usam caminhos relativos. O preset usa Compatibility, execução sem threads e redimensionamento automático do canvas. O jogo mantém a proporção 16:9 e roda sem cabeçalhos COOP/COEP.
+Abra `http://127.0.0.1:8000/`. O workflow publica **todo** o conteúdo de `builds/web/` no GitHub Pages após a validação de um push na `main`. O HTML, o JavaScript, o WebAssembly, o pacote de recursos e os scripts de áudio usam caminhos relativos. O preset usa Compatibility, execução sem threads e redimensionamento automático do canvas. O jogo mantém a proporção 16:9 e roda sem cabeçalhos COOP/COEP.
 
 ```html
 <iframe
@@ -65,7 +72,7 @@ Clique no jogo para dar foco ao teclado e desbloquear o áudio. O navegador prec
 
 ## Validação
 
-O GitHub Actions importa o projeto, verifica a inicialização e as cenas, roda o teste de fluxo headless e publica o artefato **lab-rats-web**. O workflow roda em pushes fora de `main` e em Pull Requests para `main`.
+O GitHub Actions importa o projeto, verifica a inicialização e as cenas, joga as oito fases em um teste headless e publica o artefato **lab-rats-web**. O workflow roda em pushes nas branches e em Pull Requests para `main`. Somente a `main` publica no GitHub Pages.
 
 ```bash
 godot --headless --editor --import

@@ -1,81 +1,122 @@
 [gd_scene format=3 uid="uid://bapjefgqsbeos"]
 
-[ext_resource type="Script" uid="uid://cv7wxbvxyrit5" path="res://scripts/s_managment/pause.gd" id="1_5d2l8"]
-[ext_resource type="Texture2D" uid="uid://bjly5t1epga0i" path="res://assets/buttons/exit.png" id="1_kukqi"]
-[ext_resource type="Texture2D" uid="uid://dbi0bxugt2v2a" path="res://assets/buttons/restart.png" id="2_5d2l8"]
-[ext_resource type="Texture2D" uid="uid://dj46i2rriw1cy" path="res://assets/buttons/resume.png" id="3_7l7mv"]
+[ext_resource type="Script" path="res://scripts/s_managment/hover_button.gd" id="hover_button"]
+[ext_resource type="Script" path="res://scripts/s_managment/pause.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/management/menu_theme.tres" id="theme"]
+[ext_resource type="FontFile" path="res://assets/fonts/grapesoda_2/GrapeSoda.ttf" id="display"]
+[ext_resource type="Texture2D" path="res://assets/buttons/exit.png" id="exit"]
+[ext_resource type="Texture2D" path="res://assets/buttons/restart.png" id="restart"]
+[ext_resource type="Texture2D" path="res://assets/buttons/resume.png" id="resume"]
+[ext_resource type="Texture2D" path="res://assets/buttons/pause.png" id="pause"]
+[ext_resource type="PackedScene" path="res://scenes/management/menu_panel.tscn" id="menu_panel"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v4r4p"]
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 10
+script = ExtResource("script")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1s2dm"]
+[node name="Scrim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.41176, 0.10588, 0.13333, 0.84)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_88e76"]
+[node name="Panel" parent="." instance=ExtResource("menu_panel")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -329.0
+offset_top = -180.0
+offset_right = 329.0
+offset_bottom = 180.0
+mouse_filter = 2
+theme = ExtResource("theme")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_knqa7"]
+[node name="Badge" type="TextureRect" parent="Panel"]
+offset_left = 297.0
+offset_top = 30.0
+offset_right = 361.0
+offset_bottom = 94.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = ExtResource("resume")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71k7c"]
+[node name="Title" type="Label" parent="Panel"]
+offset_left = 24.0
+offset_top = 98.0
+offset_right = 634.0
+offset_bottom = 170.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.17, 0.065, 0.10, 1)
+theme_override_font_sizes/font_size = 54
+theme_override_fonts/font = ExtResource("display")
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Paused"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cmnsq"]
+[node name="Hint" type="Label" parent="Panel"]
+offset_left = 24.0
+offset_top = 277.0
+offset_right = 634.0
+offset_bottom = 317.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.17, 0.065, 0.10, 1)
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "P / ESC   RESUME     R   RESTART"
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ofnjo"]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -310.0
+offset_top = 14.0
+offset_right = 310.0
+offset_bottom = 88.0
+mouse_filter = 2
+theme = ExtResource("theme")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rgno"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hnlu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3o3g3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5b1d"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avs0h"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ar2xs"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jkjer"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gujb"]
-
-[node name="PauseMenu" type="CanvasLayer" unique_id=1647401517]
-layer = 0
-scale = Vector2(4, 4.05)
-transform = Transform2D(4, 0, 0, 4.05, 0, 0)
-script = ExtResource("1_5d2l8")
-
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=332231323]
-offset_right = 288.0
-offset_bottom = 159.99998
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=1511968000]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 11
-alignment = 1
+mouse_filter = 2
+theme_override_constants/separation = 12
 
-[node name="exit" type="Button" parent="CenterContainer/HBoxContainer" unique_id=2049326657]
+[node name="exit" type="Button" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 56)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_v4r4p")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_1s2dm")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_88e76")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_knqa7")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_71k7c")
-icon = ExtResource("1_kukqi")
+theme_override_font_sizes/font_size = 13
+text = "Menu"
+icon = ExtResource("exit")
+script = ExtResource("hover_button")
 
-[node name="restart" type="Button" parent="CenterContainer/HBoxContainer" unique_id=280295395]
+[node name="restart" type="Button" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 56)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_cmnsq")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ofnjo")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_1rgno")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_4hnlu")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_3o3g3")
-icon = ExtResource("2_5d2l8")
+theme_override_font_sizes/font_size = 13
+text = "Restart"
+icon = ExtResource("restart")
+script = ExtResource("hover_button")
 
-[node name="resume" type="Button" parent="CenterContainer/HBoxContainer" unique_id=700386118]
+[node name="resume" type="Button" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 56)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h5b1d")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_avs0h")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_ar2xs")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_jkjer")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_5gujb")
-icon = ExtResource("3_7l7mv")
+theme_override_font_sizes/font_size = 13
+text = "Resume"
+icon = ExtResource("pause")
+script = ExtResource("hover_button")
 
 [connection signal="pressed" from="CenterContainer/HBoxContainer/exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/restart" to="." method="_on_restart_pressed"]

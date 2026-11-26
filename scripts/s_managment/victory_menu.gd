@@ -25,7 +25,10 @@ func _on_next_pressed() -> void:
 		get_tree().change_scene_to_file(GameManager.MAIN_MENU)
 
 func show_victory() -> void:
-	$CenterContainer/HBoxContainer/next.visible = GameManager.act_level < GameManager.LEVELS.size()
+	var last_level: bool = GameManager.act_level == GameManager.LEVELS.size()
+	$CenterContainer/HBoxContainer/next.visible = not last_level
+	$Panel/Title.text = "Maze cleared!" if last_level else "Level complete!"
+	$Panel/Hint.text = "ENTER   BACK TO MENU" if last_level else "ENTER   NEXT LEVEL"
 	get_tree().paused = true
 	show()
 

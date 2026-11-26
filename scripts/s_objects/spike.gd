@@ -21,6 +21,6 @@ func _ready() -> void:
 		rotation_degrees = 270
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		if body.velocity.normalized() == -spike_dir:
-			body.die()
+	# A wall can zero the velocity before the area reports the overlap.
+	if body.is_in_group("player") and body.act_dir == -spike_dir:
+		body.die()

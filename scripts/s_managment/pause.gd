@@ -16,6 +16,9 @@ func _input(event: InputEvent) -> void:
 	var scene := get_tree().current_scene
 	if scene == null or scene.is_in_group("cannot_pause") or VictoryMenu.visible:
 		return
+	var player := get_tree().get_first_node_in_group("player")
+	if player != null and player.dying:
+		return
 	if event.is_action_pressed("pause"):
 		toggle_pause()
 	elif event.is_action_pressed("reload"):
