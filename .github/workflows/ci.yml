@@ -54,16 +54,20 @@ jobs:
       - name: Export and verify static files
         shell: bash
         run: |
+          export_name="lab-rats-${GITHUB_SHA:0:12}"
           mkdir -p builds/web
-          godot --headless --export-release Web builds/web/index.html 2>&1 | tee "$RUNNER_TEMP/export.log"
+          godot --headless --export-release Web "builds/web/$export_name.html" 2>&1 | tee "$RUNNER_TEMP/export.log"
           if grep -E 'ERROR:|WARNING:' "$RUNNER_TEMP/export.log"; then exit 1; fi
           cd builds/web
-          for file in index.html index.js index.wasm index.pck index.audio.worklet.js index.audio.position.worklet.js; do
-            test -s "$file"
+          # Keep the public entry point stable and give every package its own asset URLs.
+          mv "$export_name.html" index.html
+          for extension in js wasm pck audio.worklet.js audio.position.worklet.js; do
+            test -s "$export_name.$extension"
           done
           grep -F 'const GODOT_THREADS_ENABLED = false;' index.html
-          test "$(head -c 4 index.pck)" = GDPC
-          test "$(od -An -tx1 -N4 index.wasm | xargs)" = "00 61 73 6d"
+          grep -F "\"executable\":\"$export_name\"" index.html
+          test "$(head -c 4 "$export_name.pck")" = GDPC
+          test "$(od -An -tx1 -N4 "$export_name.wasm" | xargs)" = "00 61 73 6d"
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
