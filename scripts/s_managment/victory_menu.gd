@@ -10,19 +10,21 @@ func _input(event: InputEvent) -> void:
 		_on_next_pressed()
 
 func _on_exit_pressed() -> void:
+	SoundPlayer.play_click()
 	close_victory()
-	get_tree().change_scene_to_file(GameManager.MAIN_MENU)
+	GameManager.return_to_menu()
 
 func _on_restart_pressed() -> void:
+	SoundPlayer.play_click()
 	close_victory()
-	get_tree().reload_current_scene()
+	GameManager.restart_level()
 
 func _on_next_pressed() -> void:
 	close_victory()
 	if GameManager.act_level < GameManager.LEVELS.size():
-		GameManager.open_level(GameManager.act_level + 1)
+		GameManager.open_level(GameManager.act_level + 1, true)
 	else:
-		get_tree().change_scene_to_file(GameManager.MAIN_MENU)
+		GameManager.return_to_menu()
 
 func show_victory() -> void:
 	var last_level: bool = GameManager.act_level == GameManager.LEVELS.size()
@@ -35,4 +37,3 @@ func show_victory() -> void:
 func close_victory() -> void:
 	hide()
 	get_tree().paused = false
-	SoundPlayer.play_sound("res://SFX/managment_sfx/UI_click.mp3")

@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
+const MOVE_ACTIONS: Array[StringName] = [&"UP", &"DOWN", &"LEFT", &"RIGHT"]
 const PixelBurst = preload("res://scripts/s_objects/pixel_burst.gd")
-const DeathTransition = preload("res://scripts/s_managment/death_transition.gd")
 const WALL_DUST: Array[Color] = [Color("#ff9757"), Color("#d4662f"), Color("#f8ffb8")]
 const DEATH_DUST: Array[Color] = [Color("#ff74aa"), Color("#ff9757"), Color("#f8ffb8")]
 var idle = true
@@ -13,13 +13,14 @@ var act_dir := Vector2.ZERO
 var bounce_tween: Tween
 var slide_distance := 0.0
 var dust_cooldown := 0.0
+var held_at_stop: Array[StringName] = []
 @onready var spr: Sprite2D = $player_spr
 @onready var sprite_rest_position := spr.position
 
 func _physics_process(delta: float) -> void:
 
-	var direction_y := Input.get_axis("UP", "DOWN")
-	var direction_x := Input.get_axis("LEFT", "RIGHT")
+	var direction_y := movement_strength(&"DOWN") - movement_strength(&"UP")
+	var direction_x := movement_strength(&"RIGHT") - movement_strength(&"LEFT")
 
 	dust_cooldown = maxf(0.0, dust_cooldown - delta)
 	var previous_position := global_position
@@ -41,6 +42,8 @@ func _physics_process(delta: float) -> void:
 			SoundPlayer.play_sound("res://SFX/managment_sfx/Wall_hit.mp3")
 			Events.camera_shake.emit(SPEED, 2.5)
 		moving_time = 0
+		# Let Area2D signals see the incoming direction before reading a new one.
+		return
 
 	if idle:
 		if direction_x != 0 and direction_x != act_dir.x:
@@ -49,6 +52,25 @@ func _physics_process(delta: float) -> void:
 			slide(Vector2(0, direction_y))
 	else:
 		moving_time += 1
+
+func movement_strength(action: StringName) -> float:
+	if not held_at_stop.has(action):
+		return Input.get_action_strength(action)
+	if not Input.is_action_pressed(action):
+		held_at_stop.erase(action)
+	return 0.0
+
+func stop_at(grid_position: Vector2) -> void:
+	held_at_stop.clear()
+	for action in MOVE_ACTIONS:
+		if Input.is_action_pressed(action):
+			held_at_stop.append(action)
+
+	global_position = grid_position
+	idle = true
+	act_dir = Vector2.ZERO
+	velocity = Vector2.ZERO
+	moving_time = 0
 
 func slide(direction: Vector2) -> void:
 	if idle:
@@ -72,7 +94,7 @@ func reset_sprite_bounce() -> void:
 	spr.position = sprite_rest_position
 
 func die() -> void:
-	if dying or VictoryMenu.visible:
+	if dying or VictoryMenu.visible or GameManager.is_transitioning():
 		return
 	dying = true
 	set_physics_process(false)
@@ -85,10 +107,7 @@ func die() -> void:
 func begin_death() -> void:
 	emit_burst(spr.global_position, DEATH_DUST, 24)
 	spr.hide()
-	var tree := get_tree()
-	var transition := DeathTransition.new()
-	tree.root.add_child(transition)
-	transition.play(tree.current_scene)
+	GameManager.restart_after_death()
 
 func emit_burst(origin: Vector2, palette: Array[Color], count: int, direction := Vector2.ZERO) -> void:
 	var burst := PixelBurst.new()

@@ -53,15 +53,38 @@ func run() -> void:
 		assert(not VictoryMenu.visible and not tree.paused)
 	assert(tree.current_scene.scene_file_path == GameManager.MAIN_MENU)
 
-	# Test head-on approaches into the up and left branches of level 6.
+	# A held key must not immediately restart the slide from a stop tile.
 	GameManager.open_level(6)
 	await tree.scene_changed
-	for action in ["UP", "LEFT"]:
+	await play_route("R")
+	var stopped_player = tree.current_scene.get_node("map/objects/player")
+	var stop_position: Vector2 = tree.current_scene.get_node("map/objects/LowerStop").global_position
+	Input.action_press("UP")
+	for frame in 36:
+		await tree.physics_frame
+	assert(is_instance_valid(stopped_player) and stopped_player.idle and stopped_player.global_position == stop_position)
+	Input.action_release("UP")
+	await tree.physics_frame
+	await tree.physics_frame
+	Input.action_press("UP")
+	await tree.physics_frame
+	await tree.physics_frame
+	Input.action_release("UP")
+	assert(not stopped_player.idle and stopped_player.velocity.y < 0.0)
+	await tree.scene_changed
+	assert(GameManager.act_level == 6)
+
+	# Test head-on approaches into both branches of level 6 with opposite input.
+	for approach in [["UP", "DOWN"], ["LEFT", "RIGHT"]]:
 		await play_route("RU")
 		var before_death := tree.current_scene.get_instance_id()
-		Input.action_press(action)
+		Input.action_press(approach[0])
+		await tree.physics_frame
+		await tree.physics_frame
+		Input.action_release(approach[0])
+		Input.action_press(approach[1])
 		await tree.scene_changed
-		Input.action_release(action)
+		Input.action_release(approach[1])
 		assert(GameManager.act_level == 6 and tree.current_scene.get_instance_id() != before_death)
 
 	GameManager.open_level(3)
