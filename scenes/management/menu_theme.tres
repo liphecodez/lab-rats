@@ -1,0 +1,67 @@
+[gd_resource type="Theme" format=3 uid="uid://b0su1548tgo4r"]
+
+[ext_resource type="FontFile" uid="uid://mt31ds6eqtd5" path="res://assets/fonts/press_start_2p/PressStart2P.ttf" id="1_font"]
+[ext_resource type="Texture2D" uid="uid://dpsbq3ew40lq0" path="res://assets/buttons/UI.png" id="2_frame"]
+
+[sub_resource type="StyleBoxFlat" id="focus"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.59216, 0.34118, 1)
+
+[sub_resource type="StyleBoxTexture" id="hover"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+texture = ExtResource("2_frame")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+modulate_color = Color(0.36, 0.32, 0.58, 1)
+
+[sub_resource type="StyleBoxTexture" id="normal"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+texture = ExtResource("2_frame")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+modulate_color = Color(0.27, 0.26, 0.44, 1)
+
+[sub_resource type="StyleBoxTexture" id="pressed"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+texture = ExtResource("2_frame")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+modulate_color = Color(0.21, 0.17, 0.32, 1)
+
+[resource]
+default_font = ExtResource("1_font")
+default_font_size = 15
+Button/colors/font_color = Color(1, 0.9098, 0.80392, 1)
+Button/colors/font_focus_color = Color(1, 0.9098, 0.80392, 1)
+Button/colors/font_hover_color = Color(1, 0.9098, 0.80392, 1)
+Button/colors/font_pressed_color = Color(1, 0.9098, 0.80392, 1)
+Button/constants/h_separation = 12
+Button/constants/icon_max_width = 32
+Button/styles/focus = SubResource("focus")
+Button/styles/hover = SubResource("hover")
+Button/styles/normal = SubResource("normal")
+Button/styles/pressed = SubResource("pressed")
+Label/colors/font_color = Color(1, 0.9098, 0.80392, 1)

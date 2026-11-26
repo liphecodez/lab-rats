@@ -1,13 +1,9 @@
 extends Control
 
+func _ready() -> void:
+	for index in GameManager.LEVELS.size():
+		var button: Button = $BoxContainer.get_child(index)
+		button.pressed.connect(GameManager.open_level.bind(index + 1))
+
 func _on_leave_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/management/main_menu.tscn")
-
-func _on_level_1_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/levels/level1.tscn")
-
-func _on_level_2_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/levels/level2.tscn")
-
-func _on_level_3_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/levels/level3.tscn")
+	get_tree().change_scene_to_file(GameManager.MAIN_MENU)

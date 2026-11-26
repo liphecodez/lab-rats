@@ -1,20 +1,23 @@
 [gd_scene format=3 uid="uid://c4y7fq8sdcwoy"]
 
-[ext_resource type="Script" uid="uid://bip48wrl3f58h" path="res://scripts/s_managment/level_select.gd" id="1_3shnc"]
-[ext_resource type="Texture2D" uid="uid://v2h2qw8ti8ep" path="res://assets/buttons/return-export.png" id="2_p0wlc"]
+[ext_resource type="PackedScene" path="res://scenes/management/menu_border.tscn" id="menu_border"]
+[ext_resource type="Script" uid="uid://bvap36hw8te0c" path="res://scripts/s_managment/hover_button.gd" id="hover_button"]
+[ext_resource type="Script" uid="uid://bip48wrl3f58h" path="res://scripts/s_managment/level_select.gd" id="script"]
+[ext_resource type="Theme" uid="uid://b0su1548tgo4r" path="res://scenes/management/menu_theme.tres" id="theme"]
+[ext_resource type="FontFile" uid="uid://cy86lqtsffius" path="res://assets/fonts/grapesoda_2/GrapeSoda.ttf" id="display"]
+[ext_resource type="Texture2D" uid="uid://v2h2qw8ti8ep" path="res://assets/buttons/return.png" id="back"]
+[ext_resource type="Texture2D" uid="uid://ds04vkvxe3fk2" path="res://assets/player/player.png" id="rat"]
+[ext_resource type="Texture2D" uid="uid://beecxwc3pt5ok" path="res://assets/terrain/theme1/Dir_change.png" id="arrow"]
+[ext_resource type="Texture2D" uid="uid://dx7p8gtjc4lmw" path="res://assets/terrain/theme1/Dir_stop.png" id="stop"]
+[ext_resource type="Texture2D" uid="uid://dtmmmgrciwlmn" path="res://assets/terrain/theme1/Key2.png" id="key"]
+[ext_resource type="Texture2D" uid="uid://b0h712g81f08i" path="res://assets/terrain/theme1/Goal.png" id="goals"]
+[ext_resource type="Texture2D" uid="uid://s7um0jf3e0fm" path="res://assets/terrain/theme1/Spikes.png" id="spikes"]
+[ext_resource type="Texture2D" uid="uid://b6h8ufxt3qvs5" path="res://assets/terrain/theme1/Door_open.png" id="portal"]
+[ext_resource type="Texture2D" uid="uid://b7u283lvwly1j" path="res://assets/terrain/theme1/Enemy.png" id="patrol"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7lomy"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ogo5k"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gn5uh"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j0que"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0jcas"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
-font_size = 64
+[sub_resource type="AtlasTexture" id="goal"]
+atlas = ExtResource("goals")
+region = Rect2(0, 0, 16, 16)
 
 [node name="LevelSelect" type="Control" unique_id=1530542783 groups=["cannot_pause"]]
 layout_mode = 3
@@ -23,181 +26,366 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_3shnc")
+theme = ExtResource("theme")
+script = ExtResource("script")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=262312502]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0.24705882, 0.08235294, 0.2784314, 1)
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.41176, 0.10588, 0.13333, 1)
 
-[node name="leave" type="Button" parent="." unique_id=1869828790]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 48.0
-offset_bottom = 48.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_7lomy")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogo5k")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_gn5uh")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_j0que")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0jcas")
-icon = ExtResource("2_p0wlc")
+[node name="MenuBorder" parent="." instance=ExtResource("menu_border")]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 0.5
 
-[node name="title" type="Label" parent="." unique_id=625177310]
-layout_mode = 0
-offset_left = 468.0
-offset_top = 56.0
-offset_right = 684.0
-offset_bottom = 144.0
-text = "Levels"
-label_settings = SubResource("LabelSettings_g4v7s")
+[node name="leave" type="Button" parent="."]
+offset_left = 76.0
+offset_top = 46.0
+offset_right = 234.0
+offset_bottom = 94.0
+text = "Back"
+icon = ExtResource("back")
+script = ExtResource("hover_button")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 76.0
+offset_top = 108.0
+offset_right = 876.0
+offset_bottom = 222.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.17, 0.065, 0.10, 1)
+theme_override_font_sizes/font_size = 87
+theme_override_fonts/font = ExtResource("display")
+vertical_alignment = 1
+text = "Select level"
+
+[node name="BoxContainer" type="GridContainer" parent="."]
+offset_left = 76.0
+offset_top = 236.0
+offset_right = 1076.0
+offset_bottom = 522.0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 18
+columns = 4
+
+[node name="Level1" type="Button" parent="BoxContainer"]
+custom_minimum_size = Vector2(0, 134)
+layout_mode = 2
+size_flags_horizontal = 3
+accessibility_name = "Level 1"
+script = ExtResource("hover_button")
+
+[node name="Number" type="Label" parent="BoxContainer/Level1"]
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "01"
 horizontal_alignment = 1
 vertical_alignment = 1
-uppercase = true
 
-[node name="BoxContainer" type="GridContainer" parent="." unique_id=375555487]
-custom_minimum_size = Vector2(64, 64)
-custom_maximum_size = Vector2(729, 381)
-layout_mode = 0
-offset_left = 264.0
-offset_top = 204.0
-offset_right = 888.0
-offset_bottom = 585.0
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 8
+[node name="Sprite" type="TextureRect" parent="BoxContainer/Level1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -26.0
+offset_top = -54.0
+offset_right = 26.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = ExtResource("rat")
 
-[node name="Level1" type="Button" parent="BoxContainer" unique_id=814126774]
-custom_minimum_size = Vector2(64, 64)
+[node name="Level2" type="Button" parent="BoxContainer"]
+custom_minimum_size = Vector2(0, 134)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L1"
+size_flags_horizontal = 3
+accessibility_name = "Level 2"
+script = ExtResource("hover_button")
 
-[node name="Level2" type="Button" parent="BoxContainer" unique_id=352375579]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L2"
+[node name="Number" type="Label" parent="BoxContainer/Level2"]
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "02"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Level3" type="Button" parent="BoxContainer" unique_id=2001656070]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L3"
+[node name="Sprite" type="TextureRect" parent="BoxContainer/Level2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -24.0
+offset_top = -52.0
+offset_right = 24.0
+offset_bottom = -4.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = ExtResource("arrow")
 
-[node name="Level4" type="Button" parent="BoxContainer" unique_id=1142790892]
-custom_minimum_size = Vector2(64, 64)
+[node name="Level3" type="Button" parent="BoxContainer"]
+custom_minimum_size = Vector2(0, 134)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L4"
+size_flags_horizontal = 3
+accessibility_name = "Level 3"
+script = ExtResource("hover_button")
 
-[node name="Level5" type="Button" parent="BoxContainer" unique_id=999516584]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L5"
+[node name="Number" type="Label" parent="BoxContainer/Level3"]
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "03"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Level6" type="Button" parent="BoxContainer" unique_id=1079757550]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L6
-"
+[node name="Sprite" type="TextureRect" parent="BoxContainer/Level3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -24.0
+offset_top = -52.0
+offset_right = 24.0
+offset_bottom = -4.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = ExtResource("stop")
 
-[node name="Level7" type="Button" parent="BoxContainer" unique_id=1821216712]
-custom_minimum_size = Vector2(64, 64)
+[node name="Level4" type="Button" parent="BoxContainer"]
+custom_minimum_size = Vector2(0, 134)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L7"
+size_flags_horizontal = 3
+accessibility_name = "Level 4"
+script = ExtResource("hover_button")
 
-[node name="Level8" type="Button" parent="BoxContainer" unique_id=456663658]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L8"
+[node name="Number" type="Label" parent="BoxContainer/Level4"]
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "04"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Level9" type="Button" parent="BoxContainer" unique_id=662597025]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L9"
+[node name="Sprite" type="TextureRect" parent="BoxContainer/Level4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -24.0
+offset_top = -52.0
+offset_right = 24.0
+offset_bottom = -4.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = ExtResource("key")
 
-[node name="Level10" type="Button" parent="BoxContainer" unique_id=1043935130]
-custom_minimum_size = Vector2(64, 64)
+[node name="Level5" type="Button" parent="BoxContainer"]
+custom_minimum_size = Vector2(0, 134)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L10"
+size_flags_horizontal = 3
+accessibility_name = "Level 5"
+script = ExtResource("hover_button")
 
-[node name="Level11" type="Button" parent="BoxContainer" unique_id=990837800]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L11"
+[node name="Number" type="Label" parent="BoxContainer/Level5"]
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "05"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Level12" type="Button" parent="BoxContainer" unique_id=1379315045]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L12"
+[node name="Sprite" type="TextureRect" parent="BoxContainer/Level5"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -24.0
+offset_top = -52.0
+offset_right = 24.0
+offset_bottom = -4.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = SubResource("goal")
 
-[node name="Level13" type="Button" parent="BoxContainer" unique_id=1820118140]
-custom_minimum_size = Vector2(64, 64)
+[node name="Level6" type="Button" parent="BoxContainer"]
+custom_minimum_size = Vector2(0, 134)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L13"
+size_flags_horizontal = 3
+accessibility_name = "Level 6"
+script = ExtResource("hover_button")
 
-[node name="Level14" type="Button" parent="BoxContainer" unique_id=1059931922]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L14"
+[node name="Number" type="Label" parent="BoxContainer/Level6"]
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "06"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Level15" type="Button" parent="BoxContainer" unique_id=89481530]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L15"
+[node name="Sprite" type="TextureRect" parent="BoxContainer/Level6"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -22.0
+offset_top = -44.0
+offset_right = 22.0
+offset_bottom = -12.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = ExtResource("spikes")
 
-[node name="Level16" type="Button" parent="BoxContainer" unique_id=308129914]
-custom_minimum_size = Vector2(64, 64)
+[node name="Level7" type="Button" parent="BoxContainer"]
+custom_minimum_size = Vector2(0, 134)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "L16"
+size_flags_horizontal = 3
+accessibility_name = "Level 7"
+script = ExtResource("hover_button")
+
+[node name="Number" type="Label" parent="BoxContainer/Level7"]
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "07"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite" type="TextureRect" parent="BoxContainer/Level7"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -24.0
+offset_top = -52.0
+offset_right = 24.0
+offset_bottom = -4.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = ExtResource("portal")
+
+[node name="Level8" type="Button" parent="BoxContainer"]
+custom_minimum_size = Vector2(0, 134)
+layout_mode = 2
+size_flags_horizontal = 3
+accessibility_name = "Level 8"
+script = ExtResource("hover_button")
+
+[node name="Number" type="Label" parent="BoxContainer/Level8"]
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -55.0
+offset_bottom = -11.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "08"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite" type="TextureRect" parent="BoxContainer/Level8"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -24.0
+offset_top = -52.0
+offset_right = 24.0
+offset_bottom = -4.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = ExtResource("patrol")
+
+[node name="FooterRule" type="ColorRect" parent="."]
+offset_left = 76.0
+offset_top = 563.0
+offset_right = 1076.0
+offset_bottom = 565.0
+mouse_filter = 2
+color = Color(0.41176, 0.10588, 0.13333, 0.55)
+
+[node name="SelectionHint" type="Label" parent="."]
+offset_left = 76.0
+offset_top = 569.0
+offset_right = 676.0
+offset_bottom = 611.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.18, 0.065, 0.075, 1)
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+text = "TAB   SELECT     ENTER   PLAY"
 
 [connection signal="pressed" from="leave" to="." method="_on_leave_pressed"]
-[connection signal="pressed" from="BoxContainer/Level1" to="." method="_on_level_1_pressed"]
-[connection signal="pressed" from="BoxContainer/Level2" to="." method="_on_level_2_pressed"]
-[connection signal="pressed" from="BoxContainer/Level3" to="." method="_on_level_3_pressed"]

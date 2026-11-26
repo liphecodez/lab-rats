@@ -1,107 +1,126 @@
 [gd_scene format=3 uid="uid://c66y21fh4ky1x"]
 
-[ext_resource type="Script" uid="uid://cb5f383qgxn8o" path="res://scripts/s_managment/victory_menu.gd" id="1_tptrr"]
-[ext_resource type="Texture2D" uid="uid://bjly5t1epga0i" path="res://assets/buttons/exit.png" id="2_go0eg"]
-[ext_resource type="FontFile" uid="uid://cy86lqtsffius" path="res://assets/fonts/grapesoda_2/GrapeSoda.ttf" id="2_s1tqg"]
-[ext_resource type="Texture2D" uid="uid://dbi0bxugt2v2a" path="res://assets/buttons/restart.png" id="3_gih0b"]
-[ext_resource type="Texture2D" uid="uid://c6nli31j5206x" path="res://assets/buttons/next.png" id="4_67jmu"]
+[ext_resource type="Script" path="res://scripts/s_managment/hover_button.gd" id="hover_button"]
+[ext_resource type="Script" path="res://scripts/s_managment/victory_menu.gd" id="script"]
+[ext_resource type="Theme" path="res://scenes/management/menu_theme.tres" id="theme"]
+[ext_resource type="FontFile" path="res://assets/fonts/grapesoda_2/GrapeSoda.ttf" id="display"]
+[ext_resource type="Texture2D" path="res://assets/buttons/exit.png" id="exit"]
+[ext_resource type="Texture2D" path="res://assets/buttons/restart.png" id="restart"]
+[ext_resource type="Texture2D" path="res://assets/buttons/next.png" id="next"]
+[ext_resource type="Texture2D" path="res://assets/terrain/theme1/Goal.png" id="goals"]
+[ext_resource type="PackedScene" path="res://scenes/management/menu_panel.tscn" id="menu_panel"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sfblf"]
+[sub_resource type="AtlasTexture" id="goal"]
+atlas = ExtResource("goals")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b0ktq"]
+[node name="VictoryMenu" type="CanvasLayer"]
+layer = 10
+script = ExtResource("script")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j2c52"]
+[node name="Scrim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.41176, 0.10588, 0.13333, 0.84)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kjp8e"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k6ngs"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_quw1x"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7enou"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cey58"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vrisw"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hupc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iv0tk"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_unugg"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5rbus"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cmp1f"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hmhf"]
-
-[node name="VictoryMenu" type="CanvasLayer" unique_id=383957585 groups=["cannot_pause"]]
-script = ExtResource("1_tptrr")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1859892956]
-offset_left = 275.0
-offset_right = 880.0
-offset_bottom = 648.0
-color = Color(0.24705882, 0.08235294, 0.2784314, 0.81960785)
-
-[node name="HBoxContainer" type="CenterContainer" parent="." unique_id=152729963]
+[node name="Panel" parent="." instance=ExtResource("menu_panel")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -254.0
-offset_right = 575.0
-offset_bottom = -63.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_left = -329.0
+offset_top = -180.0
+offset_right = 329.0
+offset_bottom = 180.0
+mouse_filter = 2
+theme = ExtResource("theme")
 
-[node name="Label" type="Label" parent="HBoxContainer" unique_id=321087097]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_s1tqg")
-theme_override_font_sizes/font_size = 60
-text = "You Win!!"
+[node name="Badge" type="TextureRect" parent="Panel"]
+offset_left = 297.0
+offset_top = 30.0
+offset_right = 361.0
+offset_bottom = 94.0
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+texture = SubResource("goal")
+
+[node name="Title" type="Label" parent="Panel"]
+offset_left = 24.0
+offset_top = 98.0
+offset_right = 634.0
+offset_bottom = 170.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.17, 0.065, 0.10, 1)
+theme_override_font_sizes/font_size = 54
+theme_override_fonts/font = ExtResource("display")
 horizontal_alignment = 1
+vertical_alignment = 1
+text = "Level complete!"
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=959020421]
-offset_top = 267.0
-offset_right = 288.0
-offset_bottom = 353.66666
-scale = Vector2(4, 4.05)
+[node name="Hint" type="Label" parent="Panel"]
+offset_left = 24.0
+offset_top = 277.0
+offset_right = 634.0
+offset_bottom = 317.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.17, 0.065, 0.10, 1)
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "ENTER   NEXT LEVEL"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=484269519]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -310.0
+offset_top = 14.0
+offset_right = 310.0
+offset_bottom = 88.0
+mouse_filter = 2
+theme = ExtResource("theme")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 11
-alignment = 1
+mouse_filter = 2
+theme_override_constants/separation = 12
 
-[node name="exit" type="Button" parent="CenterContainer/HBoxContainer" unique_id=572335237]
+[node name="exit" type="Button" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 56)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_sfblf")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_b0ktq")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_j2c52")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_kjp8e")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_k6ngs")
-icon = ExtResource("2_go0eg")
+theme_override_font_sizes/font_size = 13
+text = "Menu"
+icon = ExtResource("exit")
+script = ExtResource("hover_button")
 
-[node name="restart" type="Button" parent="CenterContainer/HBoxContainer" unique_id=822444619]
+[node name="restart" type="Button" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 56)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_quw1x")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_7enou")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_cey58")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_vrisw")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0hupc")
-icon = ExtResource("3_gih0b")
+theme_override_font_sizes/font_size = 13
+text = "Restart"
+icon = ExtResource("restart")
+script = ExtResource("hover_button")
 
-[node name="next" type="Button" parent="CenterContainer/HBoxContainer" unique_id=1008500180]
+[node name="next" type="Button" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 56)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_iv0tk")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_unugg")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_5rbus")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_cmp1f")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0hmhf")
-icon = ExtResource("4_67jmu")
+theme_override_font_sizes/font_size = 13
+text = "Next"
+icon = ExtResource("next")
+script = ExtResource("hover_button")
 
 [connection signal="pressed" from="CenterContainer/HBoxContainer/exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/restart" to="." method="_on_restart_pressed"]

@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  web:
+    name: Validate and export Web
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GODOT_VERSION: 4.7.2
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Install official Godot and Web template
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP"
+          release="${GODOT_VERSION}-stable"
+          base="https://github.com/godotengine/godot-builds/releases/download/$release"
+          editor="Godot_v${release}_linux.x86_64"
+          templates="Godot_v${release}_export_templates.tpz"
+          curl --fail --silent --show-error --location --retry 3 --remote-name "$base/$editor.zip"
+          curl --fail --silent --show-error --location --retry 3 --remote-name "$base/$templates"
+          sha256sum --check <<SUMS
+          cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4  $editor.zip
+          f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011  $templates
+          SUMS
+          unzip -q "$editor.zip"
+          ln -s "$RUNNER_TEMP/$editor" godot
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+          template_dir="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$template_dir"
+          unzip -p "$templates" templates/web_nothreads_release.zip > "$template_dir/web_nothreads_release.zip"
+
+      - name: Import project and run smoke checks
+        shell: bash
+        run: |
+          godot --headless --editor --import 2>&1 | tee "$RUNNER_TEMP/import.log"
+          godot --headless --quit-after 3 2>&1 | tee "$RUNNER_TEMP/startup.log"
+          godot --headless --fixed-fps 60 --quit-after 10000 res://tests/smoke.tscn 2>&1 | tee "$RUNNER_TEMP/smoke.log"
+          if grep -E 'ERROR:|WARNING:' "$RUNNER_TEMP/"{import,startup,smoke}.log; then exit 1; fi
+          grep -F 'Lab Rats smoke checks passed' "$RUNNER_TEMP/smoke.log"
+
+      - name: Export and verify static files
+        shell: bash
+        run: |
+          mkdir -p builds/web
+          godot --headless --export-release Web builds/web/index.html 2>&1 | tee "$RUNNER_TEMP/export.log"
+          if grep -E 'ERROR:|WARNING:' "$RUNNER_TEMP/export.log"; then exit 1; fi
+          cd builds/web
+          for file in index.html index.js index.wasm index.pck index.audio.worklet.js index.audio.position.worklet.js; do
+            test -s "$file"
+          done
+          grep -F 'const GODOT_THREADS_ENABLED = false;' index.html
+          test "$(head -c 4 index.pck)" = GDPC
+          test "$(od -An -tx1 -N4 index.wasm | xargs)" = "00 61 73 6d"
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: lab-rats-web
+          path: builds/web/
+          if-no-files-found: error
+
+      - name: Package GitHub Pages site
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
+        with:
+          path: builds/web/
+
+  deploy:
+    name: Publish GitHub Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: web
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified export
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="Shader" path="res://scenes/management/menu_atmosphere.gdshader" id="1_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_paper"]
+shader = ExtResource("1_shader")
+
+[node name="MenuAtmosphere" type="ColorRect"]
+material = SubResource("ShaderMaterial_paper")
+mouse_filter = 2

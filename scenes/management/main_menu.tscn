@@ -1,8 +1,21 @@
 [gd_scene format=3 uid="uid://s2wgquvxyrxc"]
 
-[ext_resource type="Script" uid="uid://cfyq5fabp4slw" path="res://scripts/s_managment/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="FontFile" uid="uid://cy86lqtsffius" path="res://assets/fonts/grapesoda_2/GrapeSoda.ttf" id="2_am7b7"]
-[ext_resource type="FontFile" uid="uid://mt31ds6eqtd5" path="res://assets/fonts/press_start_2p/PressStart2P.ttf" id="3_h6sej"]
+[ext_resource type="FontFile" uid="uid://cy86lqtsffius" path="res://assets/fonts/grapesoda_2/GrapeSoda.ttf" id="display"]
+[ext_resource type="Texture2D" uid="uid://v2h2qw8ti8ep" path="res://assets/buttons/return.png" id="exit"]
+[ext_resource type="Script" uid="uid://bvap36hw8te0c" path="res://scripts/s_managment/hover_button.gd" id="hover_button"]
+[ext_resource type="PackedScene" uid="uid://ds3o4smalyu4m" path="res://scenes/management/menu_maze.tscn" id="maze"]
+[ext_resource type="PackedScene" path="res://scenes/management/menu_border.tscn" id="menu_border"]
+[ext_resource type="Texture2D" uid="uid://c6nli31j5206x" path="res://assets/buttons/next.png" id="next"]
+[ext_resource type="Script" uid="uid://cfyq5fabp4slw" path="res://scripts/s_managment/main_menu.gd" id="script"]
+[ext_resource type="Theme" uid="uid://b0su1548tgo4r" path="res://scenes/management/menu_theme.tres" id="theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_maze"]
+bg_color = Color(0.4117647, 0.10588235, 0.13333333, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 4
 
 [node name="MainMenu" type="Control" unique_id=1232568005 groups=["cannot_pause"]]
 layout_mode = 3
@@ -11,51 +24,139 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_l6cm7")
+theme = ExtResource("theme")
+script = ExtResource("script")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1844918315]
+[node name="Background" type="ColorRect" parent="." unique_id=1689122650]
 layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0.24705882, 0.08235294, 0.2784314, 1)
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.41176, 0.10588, 0.13333, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=326766688]
+[node name="MenuBorder" parent="." unique_id=1617475243 instance=ExtResource("menu_border")]
+layout_mode = 1
+anchors_preset = -1
+
+[node name="Genre" type="Label" parent="." unique_id=2064075340]
 layout_mode = 0
-offset_left = 390.0
-offset_top = 101.0
-offset_right = 735.0
-offset_bottom = 496.0
-theme_override_constants/separation = 16
+offset_left = 76.0
+offset_top = 96.0
+offset_right = 556.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.18, 0.065, 0.075, 1)
+theme_override_font_sizes/font_size = 14
+text = "LABYRINTH PUZZLE"
+vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=2013600909]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("2_am7b7")
-theme_override_font_sizes/font_size = 45
-text = "Lab Rat"
-horizontal_alignment = 1
+[node name="GameTitle" type="Label" parent="." unique_id=1540132264]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 124.0
+offset_right = 572.0
+offset_bottom = 242.0
+theme_override_colors/font_color = Color(0.18, 0.065, 0.075, 1)
+theme_override_fonts/font = ExtResource("display")
+theme_override_font_sizes/font_size = 110
+text = "Lab Rats"
+vertical_alignment = 1
 
-[node name="play" type="Button" parent="VBoxContainer" unique_id=1285794853]
+[node name="Instructions" type="Label" parent="." unique_id=840878583]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 244.0
+offset_right = 576.0
+offset_bottom = 309.0
+theme_override_colors/font_color = Color(0.18, 0.065, 0.075, 1)
+theme_override_font_sizes/font_size = 14
+text = "Slide through the maze.
+Find your way to the exit."
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2054953363]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 332.0
+offset_right = 448.0
+offset_bottom = 522.0
+theme_override_constants/separation = 12
+
+[node name="play" type="Button" parent="VBoxContainer" unique_id=1972695857]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-size_flags_stretch_ratio = 0.0
-theme_override_fonts/font = ExtResource("3_h6sej")
 text = "Play"
+icon = ExtResource("next")
+script = ExtResource("hover_button")
 
-[node name="levels" type="Button" parent="VBoxContainer" unique_id=1967250730]
+[node name="levels" type="Button" parent="VBoxContainer" unique_id=834699866]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_h6sej")
-text = "Levels"
+text = "Select level"
+script = ExtResource("hover_button")
 
-[node name="Label2" type="Label" parent="VBoxContainer" unique_id=1830916121]
+[node name="quit" type="Button" parent="VBoxContainer" unique_id=501067423]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "
-"
-horizontal_alignment = 1
-
-[node name="quit" type="Button" parent="VBoxContainer" unique_id=941518058]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_h6sej")
 text = "Quit"
+icon = ExtResource("exit")
+script = ExtResource("hover_button")
+
+[node name="MazeBackdrop" type="Panel" parent="." unique_id=1547317704]
+layout_mode = 0
+offset_left = 542.0
+offset_top = 12.0
+offset_right = 1134.0
+offset_bottom = 604.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_maze")
+
+[node name="Maze" parent="." unique_id=1814759078 instance=ExtResource("maze")]
+position = Vector2(550, 20)
+scale = Vector2(4, 4)
+
+[node name="FooterRule" type="ColorRect" parent="." unique_id=1426098762]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 612.0
+offset_right = 1126.0
+offset_bottom = 614.0
+mouse_filter = 2
+color = Color(0.41176, 0.10588, 0.13333, 0.55)
+
+[node name="MoveHint" type="Label" parent="." unique_id=556963027]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 615.0
+offset_right = 471.0
+offset_bottom = 640.0
+theme_override_colors/font_color = Color(0.18, 0.065, 0.075, 1)
+theme_override_font_sizes/font_size = 12
+text = "ARROWS / WASD   MOVE"
+vertical_alignment = 1
+
+[node name="PauseHint" type="Label" parent="." unique_id=692283953]
+layout_mode = 0
+offset_left = 487.0
+offset_top = 615.0
+offset_right = 762.0
+offset_bottom = 640.0
+theme_override_colors/font_color = Color(0.18, 0.065, 0.075, 1)
+theme_override_font_sizes/font_size = 12
+text = "P / ESC   PAUSE"
+vertical_alignment = 1
+
+[node name="RestartHint" type="Label" parent="." unique_id=3361897]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 615.0
+offset_right = 1073.0
+offset_bottom = 640.0
+theme_override_colors/font_color = Color(0.18, 0.065, 0.075, 1)
+theme_override_font_sizes/font_size = 12
+text = "R   RESTART"
+vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/levels" to="." method="_on_levels_pressed"]
