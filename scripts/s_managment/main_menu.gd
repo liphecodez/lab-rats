@@ -5,9 +5,11 @@ func _ready() -> void:
 		$VBoxContainer/quit.hide()
 
 func _on_play_pressed() -> void:
+	SoundPlayer.play_click()
 	GameManager.open_level(GameManager.act_level)
 
 func _on_levels_pressed() -> void:
+	SoundPlayer.play_click()
 	get_tree().change_scene_to_file("res://scenes/management/level_select.tscn")
 
 func _on_quit_pressed() -> void:

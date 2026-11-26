@@ -14,7 +14,7 @@ func _input(event: InputEvent) -> void:
 		return
 
 	var scene := get_tree().current_scene
-	if scene == null or scene.is_in_group("cannot_pause") or VictoryMenu.visible:
+	if scene == null or scene.is_in_group("cannot_pause") or VictoryMenu.visible or GameManager.is_transitioning():
 		return
 	var player := get_tree().get_first_node_in_group("player")
 	if player != null and player.dying:
@@ -22,26 +22,26 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		toggle_pause()
 	elif event.is_action_pressed("reload"):
-		reload()
+		reload(true)
 
 func _on_exit_pressed() -> void:
+	SoundPlayer.play_click()
 	toggle_pause()
-	SoundPlayer.play_sound("res://SFX/managment_sfx/UI_click.mp3")
-	get_tree().change_scene_to_file(GameManager.MAIN_MENU)
+	GameManager.return_to_menu()
 	
 func _on_resume_pressed() -> void:
 	toggle_pause()
-	SoundPlayer.play_sound("res://SFX/managment_sfx/UI_click.mp3")
+	SoundPlayer.play_click()
 
 func _on_restart_pressed() -> void:
+	SoundPlayer.play_click()
 	reload()
-	SoundPlayer.play_sound("res://SFX/managment_sfx/UI_click.mp3")
 
 func toggle_pause():
 	get_tree().paused = !get_tree().paused
 	visible = get_tree().paused
 	
-func reload():
+func reload(with_chime := false) -> void:
 	if get_tree().paused == true:
 		toggle_pause()
-	get_tree().reload_current_scene()
+	GameManager.restart_level(with_chime)

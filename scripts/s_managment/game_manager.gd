@@ -8,6 +8,7 @@ var keys2_t = 0
 var keys3_col = 0
 var keys3_t = 0
 
+const SceneTransition = preload("res://scripts/s_managment/scene_transition.gd")
 const MAIN_MENU = "res://scenes/management/main_menu.tscn"
 const LEVELS = [
 	"res://scenes/levels/level1.tscn",
@@ -20,6 +21,26 @@ const LEVELS = [
 	"res://scenes/levels/level8.tscn",
 ]
 
-func open_level(number: int) -> void:
+var transition := SceneTransition.new()
+
+func _ready() -> void:
+	add_child(transition)
+
+func open_level(number: int, with_chime := false) -> void:
 	if number >= 1 and number <= LEVELS.size():
-		get_tree().change_scene_to_file(LEVELS[number - 1])
+		transition.play(LEVELS[number - 1], transition_mode(with_chime))
+
+func restart_level(with_chime := false) -> void:
+	transition.play("", transition_mode(with_chime))
+
+func restart_after_death() -> void:
+	transition.play("", SceneTransition.Mode.DEATH)
+
+func transition_mode(with_chime: bool) -> SceneTransition.Mode:
+	return SceneTransition.Mode.CHIME if with_chime else SceneTransition.Mode.QUIET
+
+func return_to_menu() -> void:
+	transition.play(MAIN_MENU)
+
+func is_transitioning() -> bool:
+	return transition.switching
